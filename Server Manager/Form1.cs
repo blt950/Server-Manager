@@ -58,7 +58,7 @@ namespace Server_Manager
         private static extern int ShowWindow(int hwnd, int nCmdShow);
 
         // Variables
-        string version = "0.2";
+        string version = "0.3";
         string logFile = "console.log";
         int totalServers = 0;
         int onlineServers = 0;
