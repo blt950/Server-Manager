@@ -1,8 +1,0 @@
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\obj\x86\Release\Server_Manager.Form1.resources
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\obj\x86\Release\Server Manager.csproj.GenerateResource.Cache
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\bin\Release\Server Manager.exe.config
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\bin\Release\Server Manager.exe
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\bin\Release\Server Manager.pdb
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\obj\x86\Release\Server_Manager.Properties.Resources.resources
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\obj\x86\Release\Server Manager.exe
-C:\Users\Daniel\Documents\Visual Studio 2015\Projects\Server Manager\Server Manager\obj\x86\Release\Server Manager.pdb
