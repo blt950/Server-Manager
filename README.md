@@ -6,6 +6,11 @@ Server manager made by me. It's a program made in C# to control executable serve
 
 I'm releasing this mostly because it is working well, though it's one of the projects I'm not going to continue due to I don't have the need of such program anymore. Though feel free to create pull requests to contriube on finishing the software. 
 
+# Download
+
+###Version 0.3
+https://github.com/blt950/Server-Manager/releases/download/0.3/Server.Manager.0.3.zip
+
 # Config file
 
 In order for the program to start you need a servers.cfg file in the same directory as the .exe of manager. It's not the best solution, though I never got that far to implement it as independent GUI. The servers.cfg is read line by line, and this is an example and buildup:
