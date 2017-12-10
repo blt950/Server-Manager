@@ -5,13 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;   // For DLL importing 
 
 namespace Server_Manager
 {
-    public class Server : Form
+    public class Server
     {
         private bool online = false;
         private bool hidden = false;

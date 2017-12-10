@@ -233,7 +233,13 @@ namespace Server_Manager
             }
             catch (System.IO.FileNotFoundException)
             {
-                MessageBox.Show("Could not find servers.cfg file in root folder.\nCreate or place one and try again.", "Setting not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                // Create new Config File and Restart the Software
+                System.IO.File.Create("servers.cfg");
+
+                ProcessStartInfo Info = new ProcessStartInfo();
+                Info.FileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+                Process.Start(Info);
+
                 System.Environment.Exit(1);
             }
 
