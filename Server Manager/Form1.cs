@@ -8,13 +8,16 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;   // For DLL importing 
+using System.IO;
+using System.Reflection;
 
 /*
  * TODO
  * 
  * - Add auto-restart and stop if restart fails 3 times
  * - Add update button
- * - Add GUI server add/remove/edit
+ * - Add GUI server remove/edit
+ * - Improve GUI server add (e.g.: Check if given ID is already taken)
  * - Add colored text to the ONLINE/OFFLINE
  * - Not all servers still hiding
  * 
@@ -498,6 +501,12 @@ namespace Server_Manager
 
 
 
+        // Server > Add
+        private void addToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            NewServer newServerDialog = new NewServer();
+            newServerDialog.Show();
+        }
 
         // Server > Start/Stop
         private void startStopToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -626,8 +635,5 @@ namespace Server_Manager
             crashTick++;
 
         }
-
-       
-
     }
 }
