@@ -132,7 +132,7 @@
             // 
             // additionalArguments
             // 
-            this.additionalArguments.Location = new System.Drawing.Point(12, 207);
+            this.additionalArguments.Location = new System.Drawing.Point(15, 207);
             this.additionalArguments.Name = "additionalArguments";
             this.additionalArguments.Size = new System.Drawing.Size(286, 20);
             this.additionalArguments.TabIndex = 12;
