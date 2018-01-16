@@ -111,7 +111,6 @@
             // 
             this.currentPath.Location = new System.Drawing.Point(15, 71);
             this.currentPath.Name = "currentPath";
-            this.currentPath.ReadOnly = true;
             this.currentPath.Size = new System.Drawing.Size(373, 20);
             this.currentPath.TabIndex = 9;
             // 
@@ -119,7 +118,6 @@
             // 
             this.currentExecuteable.Location = new System.Drawing.Point(15, 145);
             this.currentExecuteable.Name = "currentExecuteable";
-            this.currentExecuteable.ReadOnly = true;
             this.currentExecuteable.Size = new System.Drawing.Size(154, 20);
             this.currentExecuteable.TabIndex = 10;
             // 
