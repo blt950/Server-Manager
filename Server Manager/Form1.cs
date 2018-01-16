@@ -102,7 +102,7 @@ namespace Server_Manager
             if (result == DialogResult.OK)
             {
                 stopAllServers(false);
-                System.Environment.Exit(1);
+                System.Environment.Exit(0);
             }
         }
 
@@ -243,7 +243,7 @@ namespace Server_Manager
                 Info.FileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
                 Process.Start(Info);
 
-                System.Environment.Exit(1);
+                System.Environment.Exit(0);
             }
 
         }
