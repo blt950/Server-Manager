@@ -508,6 +508,44 @@ namespace Server_Manager
             newServerDialog.Show();
         }
 
+        // Server > Edit
+        private void editToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Please edit the Line according to the Server you want to Edit.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                Process.Start("servers.cfg");
+            }
+            catch(FileNotFoundException ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                loadSettings();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Server > Remove
+        private void removeToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            MessageBox.Show("Please delete the Line according to the Server you want to Remove.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                Process.Start("servers.cfg");
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                loadSettings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         // Server > Start/Stop
         private void startStopToolStripMenuItem1_Click(object sender, EventArgs e)
         {
