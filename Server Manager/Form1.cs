@@ -234,16 +234,16 @@ namespace Server_Manager
 
                 logAdd("All settings have been reloaded.");
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 // Create new Config File and Restart the Software
-                System.IO.File.Create("servers.cfg");
+                File.Create("servers.cfg");
 
                 ProcessStartInfo Info = new ProcessStartInfo();
-                Info.FileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+                Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
                 Process.Start(Info);
 
-                System.Environment.Exit(0);
+                Environment.Exit(0);
             }
 
         }
@@ -530,10 +530,43 @@ namespace Server_Manager
         // Server > Remove
         private void removeToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show("Please delete the Line according to the Server you want to Remove.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            var dialogResult = MessageBox.Show("Are you Sure you want to Delete this Server?\nName:" + selectedServer.getName(), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if(dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
             try
             {
-                Process.Start("servers.cfg");
+                string line = null;
+                int line_number = 0;
+                int line_to_delete = selectedServer.getID();
+
+                using (StreamReader reader = new StreamReader("servers.cfg"))
+                {
+                    using (StreamWriter writer = new StreamWriter("temp_servers.cfg"))
+                    {
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            line_number++;
+
+                            if (line_number == line_to_delete)
+                                continue;
+
+                            writer.WriteLine(line);
+                        }
+                    }
+                }
+
+                File.Delete("servers.cfg");
+                File.Move("temp_servers.cfg", "servers.cfg");
+
+                ProcessStartInfo Info = new ProcessStartInfo();
+                Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
+                Process.Start(Info);
+
+                Environment.Exit(0);
             }
             catch (FileNotFoundException ex)
             {
