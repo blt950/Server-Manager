@@ -530,15 +530,15 @@ namespace Server_Manager
         // Server > Remove
         private void removeToolStripMenuItem1_Click_1(object sender, EventArgs e)
         {
-            var dialogResult = MessageBox.Show("Are you Sure you want to Delete this Server?\nName:" + selectedServer.getName(), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if(dialogResult == DialogResult.No)
-            {
-                return;
-            }
-
             try
             {
+                var dialogResult = MessageBox.Show("Are you Sure you want to Delete this Server?\nName: " + selectedServer.getName(), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
                 string line = null;
                 int line_number = 0;
                 int line_to_delete = selectedServer.getID();
