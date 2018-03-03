@@ -12,7 +12,7 @@ using System.Reflection;
  * 
  * - Add auto-restart and stop if restart fails 3 times
  * - Add update button
- * - Add GUI server remove/edit
+ * - Add GUI server edit
  * - Improve GUI server add (e.g.: Check if given ID is already taken)
  * - Add colored text to the ONLINE/OFFLINE
  * - Not all servers still hiding
@@ -20,6 +20,13 @@ using System.Reflection;
 */
 
 /*
+ * Changelog 0.4 (3rd March 2018)
+ * + Added Add Server GUI
+ * + Added Remove Server GUI
+ * + Added Edit Server Button
+ * + Fixed Minor Bugs
+ * + [The SteamCMD Version also has SteamCMD Install/Update Added]
+ * 
  * Changelog 0.3 (25th August 2015)
  * + Moved "About" to the new "Help" tab.
  * + Moved Reload settings under Servers tab.
