@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewServer));
             this.btnAddServer = new System.Windows.Forms.Button();
             this.currentName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,105 +44,69 @@
             // 
             // btnAddServer
             // 
-            this.btnAddServer.Enabled = false;
-            this.btnAddServer.Location = new System.Drawing.Point(313, 207);
+            resources.ApplyResources(this.btnAddServer, "btnAddServer");
             this.btnAddServer.Name = "btnAddServer";
-            this.btnAddServer.Size = new System.Drawing.Size(75, 23);
-            this.btnAddServer.TabIndex = 0;
-            this.btnAddServer.Text = "Add Server";
             this.btnAddServer.UseVisualStyleBackColor = true;
             this.btnAddServer.Click += new System.EventHandler(this.btnAddServer_Click);
             // 
             // currentName
             // 
-            this.currentName.Location = new System.Drawing.Point(53, 6);
+            resources.ApplyResources(this.currentName, "currentName");
             this.currentName.Name = "currentName";
-            this.currentName.Size = new System.Drawing.Size(335, 20);
-            this.currentName.TabIndex = 1;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Name:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 47);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Path:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 121);
+            resources.ApplyResources(this.label4, "label4");
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Executeable:";
             // 
             // btnSelectPath
             // 
-            this.btnSelectPath.Location = new System.Drawing.Point(53, 42);
+            resources.ApplyResources(this.btnSelectPath, "btnSelectPath");
             this.btnSelectPath.Name = "btnSelectPath";
-            this.btnSelectPath.Size = new System.Drawing.Size(75, 23);
-            this.btnSelectPath.TabIndex = 7;
-            this.btnSelectPath.Text = "Select";
             this.btnSelectPath.UseVisualStyleBackColor = true;
             this.btnSelectPath.Click += new System.EventHandler(this.btnSelectPath_Click);
             // 
             // btnSelectExecuteable
             // 
-            this.btnSelectExecuteable.Enabled = false;
-            this.btnSelectExecuteable.Location = new System.Drawing.Point(94, 116);
+            resources.ApplyResources(this.btnSelectExecuteable, "btnSelectExecuteable");
             this.btnSelectExecuteable.Name = "btnSelectExecuteable";
-            this.btnSelectExecuteable.Size = new System.Drawing.Size(75, 23);
-            this.btnSelectExecuteable.TabIndex = 8;
-            this.btnSelectExecuteable.Text = "Select";
             this.btnSelectExecuteable.UseVisualStyleBackColor = true;
             this.btnSelectExecuteable.Click += new System.EventHandler(this.btnSelectExecuteable_Click);
             // 
             // currentPath
             // 
-            this.currentPath.Location = new System.Drawing.Point(15, 71);
+            resources.ApplyResources(this.currentPath, "currentPath");
             this.currentPath.Name = "currentPath";
-            this.currentPath.Size = new System.Drawing.Size(373, 20);
-            this.currentPath.TabIndex = 9;
             // 
             // currentExecuteable
             // 
-            this.currentExecuteable.Location = new System.Drawing.Point(15, 145);
+            resources.ApplyResources(this.currentExecuteable, "currentExecuteable");
             this.currentExecuteable.Name = "currentExecuteable";
-            this.currentExecuteable.Size = new System.Drawing.Size(154, 20);
-            this.currentExecuteable.TabIndex = 10;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 191);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(154, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Additional Arguments (Optional)";
             // 
             // additionalArguments
             // 
-            this.additionalArguments.Location = new System.Drawing.Point(15, 207);
+            resources.ApplyResources(this.additionalArguments, "additionalArguments");
             this.additionalArguments.Name = "additionalArguments";
-            this.additionalArguments.Size = new System.Drawing.Size(286, 20);
-            this.additionalArguments.TabIndex = 12;
             // 
             // NewServer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 245);
             this.Controls.Add(this.additionalArguments);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.currentExecuteable);
@@ -156,7 +121,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "NewServer";
-            this.Text = "Create New Server";
             this.ResumeLayout(false);
             this.PerformLayout();
 

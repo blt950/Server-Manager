@@ -93,6 +93,12 @@
     <Compile Include="SCMD_InstallServer.Designer.cs">
       <DependentUpon>SCMD_InstallServer.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Form1.de-DE.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.de.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
