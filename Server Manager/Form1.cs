@@ -279,6 +279,39 @@ namespace Server_Manager
 
         }
 
+        // Remove SELECTED server from Config
+        public void removeServer()
+        {
+            string line = null;
+            int line_number = 0;
+            int line_to_delete = selectedServer.getID();
+
+            using (StreamReader reader = new StreamReader("servers.cfg"))
+            {
+                using (StreamWriter writer = new StreamWriter("temp_servers.cfg"))
+                {
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        line_number++;
+
+                        if (line_number == line_to_delete)
+                            continue;
+
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+
+            File.Delete("servers.cfg");
+            File.Move("temp_servers.cfg", "servers.cfg");
+
+            ProcessStartInfo Info = new ProcessStartInfo();
+            Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
+            Process.Start(Info);
+
+            Environment.Exit(0);
+        }
+
         // Start SELECTED server
         public void startServer(bool message)
         {
@@ -542,34 +575,7 @@ namespace Server_Manager
                     return;
                 }
 
-                string line = null;
-                int line_number = 0;
-                int line_to_delete = selectedServer.getID();
-
-                using (StreamReader reader = new StreamReader("servers.cfg"))
-                {
-                    using (StreamWriter writer = new StreamWriter("temp_servers.cfg"))
-                    {
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            line_number++;
-
-                            if (line_number == line_to_delete)
-                                continue;
-
-                            writer.WriteLine(line);
-                        }
-                    }
-                }
-
-                File.Delete("servers.cfg");
-                File.Move("temp_servers.cfg", "servers.cfg");
-
-                ProcessStartInfo Info = new ProcessStartInfo();
-                Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
-                Process.Start(Info);
-
-                Environment.Exit(0);
+                removeServer();
             }
             catch (FileNotFoundException ex)
             {
@@ -579,6 +585,24 @@ namespace Server_Manager
             catch (Exception ex)
             {
                 MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Server > Uninstall
+        private void uninstallToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("WARNING, your Server will be REMOVED FOREVER from your Hard Drive!\nProceed?", "CRITICAL WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if(result == DialogResult.Yes)
+            {
+                try { 
+                    Directory.Delete(selectedServer.getPath(), true);
+
+                    removeServer();
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

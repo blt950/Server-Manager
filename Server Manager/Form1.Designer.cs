@@ -46,6 +46,9 @@
             this.startAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steamCmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -59,9 +62,7 @@
             this.Arguments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.logBox = new System.Windows.Forms.TextBox();
             this.crashTimer = new System.Windows.Forms.Timer(this.components);
-            this.steamCmdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.uninstallToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -102,6 +103,7 @@
             this.addToolStripMenuItem1,
             this.editToolStripMenuItem1,
             this.removeToolStripMenuItem1,
+            this.uninstallToolStripMenuItem1,
             this.toolStripSeparator1,
             this.startStopToolStripMenuItem1,
             this.restartToolStripMenuItem,
@@ -193,6 +195,29 @@
             this.hideAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.hideAllToolStripMenuItem.Text = "Hide All";
             this.hideAllToolStripMenuItem.Click += new System.EventHandler(this.hideAllToolStripMenuItem_Click);
+            // 
+            // steamCmdToolStripMenuItem
+            // 
+            this.steamCmdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem1,
+            this.updateToolStripMenuItem1});
+            this.steamCmdToolStripMenuItem.Name = "steamCmdToolStripMenuItem";
+            this.steamCmdToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.steamCmdToolStripMenuItem.Text = "Steam CMD";
+            // 
+            // newToolStripMenuItem1
+            // 
+            this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
+            this.newToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem1.Text = "Install New";
+            this.newToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
+            // 
+            // updateToolStripMenuItem1
+            // 
+            this.updateToolStripMenuItem1.Name = "updateToolStripMenuItem1";
+            this.updateToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.updateToolStripMenuItem1.Text = "Update";
+            this.updateToolStripMenuItem1.Click += new System.EventHandler(this.updateToolStripMenuItem1_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -308,28 +333,12 @@
             this.crashTimer.Interval = 5000;
             this.crashTimer.Tick += new System.EventHandler(this.crashTimer_Tick);
             // 
-            // steamCmdToolStripMenuItem
+            // uninstallToolStripMenuItem1
             // 
-            this.steamCmdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem1,
-            this.updateToolStripMenuItem1});
-            this.steamCmdToolStripMenuItem.Name = "steamCmdToolStripMenuItem";
-            this.steamCmdToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
-            this.steamCmdToolStripMenuItem.Text = "Steam CMD";
-            // 
-            // newToolStripMenuItem1
-            // 
-            this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
-            this.newToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.newToolStripMenuItem1.Text = "Install New";
-            this.newToolStripMenuItem1.Click += new System.EventHandler(this.newToolStripMenuItem1_Click);
-            // 
-            // updateToolStripMenuItem1
-            // 
-            this.updateToolStripMenuItem1.Name = "updateToolStripMenuItem1";
-            this.updateToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.updateToolStripMenuItem1.Text = "Update";
-            this.updateToolStripMenuItem1.Click += new System.EventHandler(this.updateToolStripMenuItem1_Click);
+            this.uninstallToolStripMenuItem1.Name = "uninstallToolStripMenuItem1";
+            this.uninstallToolStripMenuItem1.Size = new System.Drawing.Size(155, 22);
+            this.uninstallToolStripMenuItem1.Text = "Uninstall";
+            this.uninstallToolStripMenuItem1.Click += new System.EventHandler(this.uninstallToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -393,6 +402,7 @@
         private System.Windows.Forms.ToolStripMenuItem steamCmdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem updateToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem uninstallToolStripMenuItem1;
     }
 }
 
