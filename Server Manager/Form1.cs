@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;   // For DLL importing 
@@ -102,7 +98,7 @@ namespace Server_Manager
             if (result == DialogResult.OK)
             {
                 stopAllServers(false);
-                System.Environment.Exit(0);
+                Environment.Exit(0);
             }
         }
 
@@ -181,7 +177,7 @@ namespace Server_Manager
             logBox.Text += logText;
 
             // Write to file
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(logFile, true))
+            using (StreamWriter file = new StreamWriter(logFile, true))
             {
                 file.Write(logText);
             }
@@ -202,7 +198,7 @@ namespace Server_Manager
             try
             {
                 int counter = 0;
-                string[] lines = System.IO.File.ReadAllLines("servers.cfg");
+                string[] lines = File.ReadAllLines("servers.cfg");
 
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -287,7 +283,7 @@ namespace Server_Manager
                     _processStartInfo.WorkingDirectory = selectedServer.getPath();
                     _processStartInfo.FileName = selectedServer.getExecute();
                     _processStartInfo.Arguments = selectedServer.getArguments();
-                    _processStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                    _processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                     Process p = Process.Start(_processStartInfo);
                     selectedServer.setProcess(p);
@@ -402,7 +398,7 @@ namespace Server_Manager
                         _processStartInfo.WorkingDirectory = s.getPath();
                         _processStartInfo.FileName = s.getExecute();
                         _processStartInfo.Arguments = s.getArguments();
-                        _processStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                        _processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                         Process p = Process.Start(_processStartInfo);
                         s.setProcess(p);
@@ -680,7 +676,7 @@ namespace Server_Manager
                         _processStartInfo.WorkingDirectory = s.getPath();
                         _processStartInfo.FileName = s.getExecute();
                         _processStartInfo.Arguments = s.getArguments();
-                        _processStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                        _processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                         Process p = Process.Start(_processStartInfo);
                         s.setProcess(p);
