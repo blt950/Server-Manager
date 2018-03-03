@@ -56,13 +56,13 @@
             this.toolStripStatusServers = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusServer = new System.Windows.Forms.ToolStripStatusLabel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.logBox = new System.Windows.Forms.TextBox();
-            this.crashTimer = new System.Windows.Forms.Timer(this.components);
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Server = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Path = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Arguments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.logBox = new System.Windows.Forms.TextBox();
+            this.crashTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -258,19 +258,6 @@
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_DoubleClick);
             // 
-            // logBox
-            // 
-            resources.ApplyResources(this.logBox, "logBox");
-            this.logBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.logBox.Name = "logBox";
-            this.logBox.ReadOnly = true;
-            // 
-            // crashTimer
-            // 
-            this.crashTimer.Enabled = true;
-            this.crashTimer.Interval = 5000;
-            this.crashTimer.Tick += new System.EventHandler(this.crashTimer_Tick);
-            // 
             // ID
             // 
             resources.ApplyResources(this.ID, "ID");
@@ -300,6 +287,19 @@
             resources.ApplyResources(this.Arguments, "Arguments");
             this.Arguments.Name = "Arguments";
             this.Arguments.ReadOnly = true;
+            // 
+            // logBox
+            // 
+            resources.ApplyResources(this.logBox, "logBox");
+            this.logBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.logBox.Name = "logBox";
+            this.logBox.ReadOnly = true;
+            // 
+            // crashTimer
+            // 
+            this.crashTimer.Enabled = true;
+            this.crashTimer.Interval = 5000;
+            this.crashTimer.Tick += new System.EventHandler(this.crashTimer_Tick);
             // 
             // Form1
             // 
