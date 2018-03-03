@@ -12,7 +12,7 @@ using System.Reflection;
  * 
  * - Add auto-restart and stop if restart fails 3 times
  * - Add update button
- * - Add GUI server remove/edit
+ * - Add GUI server edit
  * - Improve GUI server add (e.g.: Check if given ID is already taken)
  * - Add colored text to the ONLINE/OFFLINE
  * - Not all servers still hiding
@@ -20,6 +20,13 @@ using System.Reflection;
 */
 
 /*
+ * Changelog 0.4 (3rd March 2018)
+ * + Added Add Server GUI
+ * + Added Remove Server GUI
+ * + Added Edit Server Button
+ * + Fixed Minor Bugs
+ * + [The SteamCMD Version also has SteamCMD Install/Update Added]
+ * 
  * Changelog 0.3 (25th August 2015)
  * + Moved "About" to the new "Help" tab.
  * + Moved Reload settings under Servers tab.
@@ -270,6 +277,39 @@ namespace Server_Manager
             onlineServers = counter;
             toolStripStatusServers.Text = onlineServers + "/" + totalServers + " servers online";
 
+        }
+
+        // Remove SELECTED server from Config
+        public void removeServer()
+        {
+            string line = null;
+            int line_number = 0;
+            int line_to_delete = selectedServer.getID();
+
+            using (StreamReader reader = new StreamReader("servers.cfg"))
+            {
+                using (StreamWriter writer = new StreamWriter("temp_servers.cfg"))
+                {
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        line_number++;
+
+                        if (line_number == line_to_delete)
+                            continue;
+
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+
+            File.Delete("servers.cfg");
+            File.Move("temp_servers.cfg", "servers.cfg");
+
+            ProcessStartInfo Info = new ProcessStartInfo();
+            Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
+            Process.Start(Info);
+
+            Environment.Exit(0);
         }
 
         // Start SELECTED server
@@ -535,34 +575,7 @@ namespace Server_Manager
                     return;
                 }
 
-                string line = null;
-                int line_number = 0;
-                int line_to_delete = selectedServer.getID();
-
-                using (StreamReader reader = new StreamReader("servers.cfg"))
-                {
-                    using (StreamWriter writer = new StreamWriter("temp_servers.cfg"))
-                    {
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            line_number++;
-
-                            if (line_number == line_to_delete)
-                                continue;
-
-                            writer.WriteLine(line);
-                        }
-                    }
-                }
-
-                File.Delete("servers.cfg");
-                File.Move("temp_servers.cfg", "servers.cfg");
-
-                ProcessStartInfo Info = new ProcessStartInfo();
-                Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
-                Process.Start(Info);
-
-                Environment.Exit(0);
+                removeServer();
             }
             catch (FileNotFoundException ex)
             {
@@ -572,6 +585,24 @@ namespace Server_Manager
             catch (Exception ex)
             {
                 MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Server > Uninstall
+        private void uninstallToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("WARNING, your Server will be REMOVED FOREVER from your Hard Drive!\nProceed?", "CRITICAL WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if(result == DialogResult.Yes)
+            {
+                try { 
+                    Directory.Delete(selectedServer.getPath(), true);
+
+                    removeServer();
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -642,6 +673,28 @@ namespace Server_Manager
                     }
                 }
             }
+        }
+
+        // Steam CMD > Install New
+        private void newToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SCMD_InstallServer installServerDialog = new SCMD_InstallServer();
+            installServerDialog.Show();
+        }
+
+        //Steam CMD > Update
+        private void updateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(selectedServer.getPath()))
+            {
+                SCMD_UpdateServer updateServerDialog = new SCMD_UpdateServer(selectedServer.getPath());
+                updateServerDialog.Show();
+            } else
+            {
+                MessageBox.Show("No Path was passed to the Function!\nAre you sure you Selected a Valid Server?", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
         }
 
         /* ========================================================= */
