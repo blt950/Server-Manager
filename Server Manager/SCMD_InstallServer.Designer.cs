@@ -34,6 +34,8 @@
             this.btnAddServer = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.appID = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnValveList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // selectedPath
@@ -88,11 +90,32 @@
             this.appID.Size = new System.Drawing.Size(100, 20);
             this.appID.TabIndex = 15;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(182, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "AppID Lists:";
+            // 
+            // btnValveList
+            // 
+            this.btnValveList.Location = new System.Drawing.Point(185, 76);
+            this.btnValveList.Name = "btnValveList";
+            this.btnValveList.Size = new System.Drawing.Size(75, 23);
+            this.btnValveList.TabIndex = 17;
+            this.btnValveList.Text = "Valve";
+            this.btnValveList.UseVisualStyleBackColor = true;
+            this.btnValveList.Click += new System.EventHandler(this.btnValveList_Click);
+            // 
             // SCMD_InstallServer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(395, 113);
+            this.Controls.Add(this.btnValveList);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.appID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.selectedPath);
@@ -114,5 +137,7 @@
         private System.Windows.Forms.Button btnAddServer;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox appID;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnValveList;
     }
 }

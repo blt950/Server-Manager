@@ -33,5 +33,10 @@ namespace Server_Manager
 
             this.Close();
         }
+
+        private void btnValveList_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://developer.valvesoftware.com/wiki/Dedicated_Servers_List");
+        }
     }
 }

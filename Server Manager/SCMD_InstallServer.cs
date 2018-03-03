@@ -50,5 +50,10 @@ namespace Server_Manager
                 MessageBox.Show("One or More Textboxes are not filled yet!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnValveList_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://developer.valvesoftware.com/wiki/Dedicated_Servers_List");
+        }
     }
 }
