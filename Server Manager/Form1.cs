@@ -644,6 +644,19 @@ namespace Server_Manager
             }
         }
 
+        // Steam CMD > Install New
+        private void newToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SCMD_InstallServer installServerDialog = new SCMD_InstallServer();
+            installServerDialog.Show();
+        }
+
+        //Steam CMD > Update
+        private void updateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         /* ========================================================= */
         /*                      AUTO RESTART
         /* ========================================================= */
