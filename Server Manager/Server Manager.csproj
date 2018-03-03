@@ -70,6 +70,12 @@
     <Compile Include="NewServer.Designer.cs">
       <DependentUpon>NewServer.cs</DependentUpon>
     </Compile>
+    <Compile Include="SCMD_UpdateServer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SCMD_UpdateServer.Designer.cs">
+      <DependentUpon>SCMD_UpdateServer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Server.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,6 +111,9 @@
     </Compile>
     <EmbeddedResource Include="SCMD_InstallServer.resx">
       <DependentUpon>SCMD_InstallServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SCMD_UpdateServer.resx">
+      <DependentUpon>SCMD_UpdateServer.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
