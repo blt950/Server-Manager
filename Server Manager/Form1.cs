@@ -1,26 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;   // For DLL importing 
+using System.IO;
+using System.Reflection;
 
 /*
  * TODO
  * 
  * - Add auto-restart and stop if restart fails 3 times
  * - Add update button
- * - Add GUI server add/remove/edit
+ * - Add GUI server edit
+ * - Improve GUI server add (e.g.: Check if given ID is already taken)
  * - Add colored text to the ONLINE/OFFLINE
  * - Not all servers still hiding
  * 
 */
 
 /*
+ * Changelog 0.4 (3rd March 2018)
+ * + Added Add Server GUI
+ * + Added Remove Server GUI
+ * + Added Edit Server Button
+ * + Fixed Minor Bugs
+ * + [The SteamCMD Version also has SteamCMD Install/Update Added]
+ * 
  * Changelog 0.3 (25th August 2015)
  * + Moved "About" to the new "Help" tab.
  * + Moved Reload settings under Servers tab.
@@ -99,7 +105,7 @@ namespace Server_Manager
             if (result == DialogResult.OK)
             {
                 stopAllServers(false);
-                System.Environment.Exit(1);
+                Environment.Exit(0);
             }
         }
 
@@ -178,7 +184,7 @@ namespace Server_Manager
             logBox.Text += logText;
 
             // Write to file
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(logFile, true))
+            using (StreamWriter file = new StreamWriter(logFile, true))
             {
                 file.Write(logText);
             }
@@ -199,7 +205,7 @@ namespace Server_Manager
             try
             {
                 int counter = 0;
-                string[] lines = System.IO.File.ReadAllLines("servers.cfg");
+                string[] lines = File.ReadAllLines("servers.cfg");
 
                 for (int i = 0; i < lines.Length; i++)
                 {
@@ -231,16 +237,16 @@ namespace Server_Manager
 
                 logAdd("All settings have been reloaded.");
             }
-            catch (System.IO.FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 // Create new Config File and Restart the Software
-                System.IO.File.Create("servers.cfg");
+                File.Create("servers.cfg");
 
                 ProcessStartInfo Info = new ProcessStartInfo();
-                Info.FileName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+                Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
                 Process.Start(Info);
 
-                System.Environment.Exit(1);
+                Environment.Exit(0);
             }
 
         }
@@ -273,6 +279,39 @@ namespace Server_Manager
 
         }
 
+        // Remove SELECTED server from Config
+        public void removeServer()
+        {
+            string line = null;
+            int line_number = 0;
+            int line_to_delete = selectedServer.getID();
+
+            using (StreamReader reader = new StreamReader("servers.cfg"))
+            {
+                using (StreamWriter writer = new StreamWriter("temp_servers.cfg"))
+                {
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        line_number++;
+
+                        if (line_number == line_to_delete)
+                            continue;
+
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+
+            File.Delete("servers.cfg");
+            File.Move("temp_servers.cfg", "servers.cfg");
+
+            ProcessStartInfo Info = new ProcessStartInfo();
+            Info.FileName = Assembly.GetExecutingAssembly().GetName().Name;
+            Process.Start(Info);
+
+            Environment.Exit(0);
+        }
+
         // Start SELECTED server
         public void startServer(bool message)
         {
@@ -284,7 +323,7 @@ namespace Server_Manager
                     _processStartInfo.WorkingDirectory = selectedServer.getPath();
                     _processStartInfo.FileName = selectedServer.getExecute();
                     _processStartInfo.Arguments = selectedServer.getArguments();
-                    _processStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                    _processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                     Process p = Process.Start(_processStartInfo);
                     selectedServer.setProcess(p);
@@ -399,7 +438,7 @@ namespace Server_Manager
                         _processStartInfo.WorkingDirectory = s.getPath();
                         _processStartInfo.FileName = s.getExecute();
                         _processStartInfo.Arguments = s.getArguments();
-                        _processStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                        _processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                         Process p = Process.Start(_processStartInfo);
                         s.setProcess(p);
@@ -498,6 +537,74 @@ namespace Server_Manager
 
 
 
+        // Server > Add
+        private void addToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            NewServer newServerDialog = new NewServer();
+            newServerDialog.Show();
+        }
+
+        // Server > Edit
+        private void editToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Please edit the Line according to the Server you want to Edit.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            try
+            {
+                Process.Start("servers.cfg");
+            }
+            catch(FileNotFoundException ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                loadSettings();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Server > Remove
+        private void removeToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                var dialogResult = MessageBox.Show("Are you Sure you want to Delete this Server?\nName: " + selectedServer.getName(), "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
+                removeServer();
+            }
+            catch (FileNotFoundException ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                loadSettings();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Server > Uninstall
+        private void uninstallToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("WARNING, your Server will be REMOVED FOREVER from your Hard Drive!\nProceed?", "CRITICAL WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if(result == DialogResult.Yes)
+            {
+                try { 
+                    Directory.Delete(selectedServer.getPath(), true);
+
+                    removeServer();
+                } catch (Exception ex)
+                {
+                    MessageBox.Show("Error while opening Server Configuration:\n" + ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
         // Server > Start/Stop
         private void startStopToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -568,6 +675,28 @@ namespace Server_Manager
             }
         }
 
+        // Steam CMD > Install New
+        private void newToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SCMD_InstallServer installServerDialog = new SCMD_InstallServer();
+            installServerDialog.Show();
+        }
+
+        //Steam CMD > Update
+        private void updateToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(selectedServer.getPath()))
+            {
+                SCMD_UpdateServer updateServerDialog = new SCMD_UpdateServer(selectedServer.getPath());
+                updateServerDialog.Show();
+            } else
+            {
+                MessageBox.Show("No Path was passed to the Function!\nAre you sure you Selected a Valid Server?", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+        }
+
         /* ========================================================= */
         /*                      AUTO RESTART
         /* ========================================================= */
@@ -600,7 +729,7 @@ namespace Server_Manager
                         _processStartInfo.WorkingDirectory = s.getPath();
                         _processStartInfo.FileName = s.getExecute();
                         _processStartInfo.Arguments = s.getArguments();
-                        _processStartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Minimized;
+                        _processStartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 
                         Process p = Process.Start(_processStartInfo);
                         s.setProcess(p);
@@ -626,8 +755,5 @@ namespace Server_Manager
             crashTick++;
 
         }
-
-       
-
     }
 }

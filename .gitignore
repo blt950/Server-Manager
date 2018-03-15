@@ -1,2 +1,5 @@
 /bin/
 /obj/
+Server Manager/bin/
+Server Manager/obj/
+/.vs/

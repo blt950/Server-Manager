@@ -8,16 +8,17 @@ I'm releasing this mostly because it is working well, though it's one of the pro
 
 # Download
 
-###Version 0.3
+Version 0.3
 https://github.com/blt950/Server-Manager/releases/download/0.3/Server.Manager.0.3.zip
 
 # Config file
 
-In order for the program to start you need a servers.cfg file in the same directory as the .exe of manager. It's not the best solution, though I never got that far to implement it as independent GUI. The servers.cfg is read line by line, and this is an example and buildup:
+When Editing the Server, it would need to be done Manually (unlike Adding or Removing a Server).
+The server.cfg is being read line by line. This is an Example for a Server:
 
 ```ID|Display name|Path to EXE|EXE name|Target vars if any```
 
-servers.cfg comes with the release zip, though here is an example of the file:
+Here are more Examples for Servers:
 
 ```
 1|Garry's Mod - HL2RP #1|E:\Srcds\steamapps\common\GarrysModDS|srcds.exe|-console -game garrysmod -maxplayers 16 +map gm_construct +gamemode cwhl2rp
